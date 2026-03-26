@@ -41,6 +41,12 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "baseHref": "/paper-dungeon/",
+            "outputPath": "dist/paper-dungeon",
+            "index": {
+              "input": "src/index.html",
+              "output": "index.html"
+            },
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -88,7 +94,13 @@
           "defaultConfiguration": "development"
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "name" : "Adrien Dutertre",
+            "baseHref" : "https://adrien-dutertre.github.io/paper-dungeon/",
+            "email" : "dutertre.adrien@pm.me",
+            "dir" : "dist/paper-dungeon/browser"
+          }
         }
       }
     }
