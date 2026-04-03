@@ -2,6 +2,7 @@ import { signal, WritableSignal } from '@angular/core';
 
 export class Tile {
   private _position: number = 0;
+  private _canBeVisited: boolean = true;
   private _style: WritableSignal<string>;
   private _value: number | undefined;
 
@@ -27,5 +28,13 @@ export class Tile {
 
   set position(index: number) {
     this._position = index;
+  }
+
+  get canBeVisited(): boolean {
+    return this._canBeVisited;
+  }
+
+  set canBeVisited(allowVisit: boolean) {
+    this._canBeVisited = allowVisit;
   }
 }

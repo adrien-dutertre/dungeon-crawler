@@ -1,4 +1,4 @@
-<h2 class="m-1 font-mono text-lg font-bold">Niveau {{ floor() }}</h2>
+<h2 class="p-2 font-mono text-lg font-bold w-full justify-self-start">Niveau {{ floor() }}</h2>
 <div class="grid grid-cols-15 grid-rows-15 aspect-square sm:max-w-96 w-full relative">
     @for (tile of level(); track $index) {
     <div>
@@ -18,5 +18,5 @@
         }
     </div>
     }
-    <div id="hero" class="hero absolute top-[calc((3/15)*100%)] left-[calc((1/15)*100%)] w-1/15 aspect-square outline-2 outline-blue-500 outline-offset-2 z-10"></div>
+    <div id="hero" class="hero absolute w-1/15 aspect-square outline-2 outline-blue-500 outline-offset-2 z-10" [style]="currentPosition()"></div>
 </div>

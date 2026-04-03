@@ -1,10 +1,11 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, OnInit, signal, WritableSignal } from '@angular/core';
 import { LevelParser } from './services/level-parser';
 import { Tile } from './models/tile';
 import { PopoverModule } from 'primeng/popover';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { Monster } from './models/monster';
 import { Item } from './models/item';
+import { Hero } from '../hero-sheet/services/hero';
 
 @Component({
   selector: 'app-level',
@@ -12,7 +13,7 @@ import { Item } from './models/item';
   templateUrl: './level.html',
   styleUrl: './level.css',
 })
-export class Level {
+export class Level implements OnInit {
   readonly floor = input.required()
 
   readonly parserService = inject(LevelParser);
@@ -246,7 +247,31 @@ export class Level {
 
   readonly level = signal<Tile[]>(this.parserService.parse(this.levelDesign));
 
+  hero = inject(Hero);
+  readonly position = computed(() => {return this.hero.position()});
+
+  // Calcul de la position du héros en fonction de son index de position
+  readonly posX = computed(() => {
+    return ((this.position() - 1) % 15);
+  });
+
+  readonly posY = computed(() => {
+    return Math.floor((this.position() - 1) / 15);
+  });
+
+  currentPosition = computed(() => {
+    return {
+      top: "calc(("+this.posY()+"/15)*100%)",
+      left: "calc(("+this.posX()+"/15)*100%)"
+    }
+  });
+  // -------
+
   isInteractible(tile: Tile): boolean {
     return (tile instanceof Item) || (tile instanceof Monster);
+  }
+
+  ngOnInit(): void {
+    this.hero.levelContext = this.level();
   }
 }
