@@ -1,10 +1,9 @@
-import { Component, computed, inject, input, OnInit, signal, WritableSignal } from '@angular/core';
+import { Interactible } from './models/interactible';
+import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
 import { LevelParser } from './services/level-parser';
 import { Tile } from './models/tile';
 import { PopoverModule } from 'primeng/popover';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
-import { Monster } from './models/monster';
-import { Item } from './models/item';
 import { Hero } from '../hero-sheet/services/hero';
 
 @Component({
@@ -266,10 +265,6 @@ export class Level implements OnInit {
     }
   });
   // -------
-
-  isInteractible(tile: Tile): boolean {
-    return (tile instanceof Item) || (tile instanceof Monster);
-  }
 
   ngOnInit(): void {
     this.hero.levelContext = this.level();

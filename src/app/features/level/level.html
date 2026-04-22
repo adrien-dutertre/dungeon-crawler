@@ -2,8 +2,8 @@
 <div class="grid grid-cols-15 grid-rows-15 aspect-square sm:max-w-96 w-full relative">
     @for (tile of level(); track $index) {
     <div>
-        @if (isInteractible(tile)) {
-        <p-overlaybadge [value]="tile.value ?? '?'" severity="secondary" badgeSize="small">
+        @if (tile.interactible && (tile.value) && (tile.description) && ((!tile.looted) || (!tile.dead))) {
+        <p-overlaybadge [value]="tile.value() ?? '?'" severity="secondary" badgeSize="small">
             <div [class]="tile.style()"
                  class="w-full aspect-square border border-neutral-100"
                  (click)="pop.toggle($event)">

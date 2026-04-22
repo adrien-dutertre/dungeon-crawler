@@ -1,5 +1,6 @@
+import { WritableSignal } from '@angular/core';
 import { Tile } from './tile';
 
-export abstract class Interactible extends Tile {
-    abstract interaction(): void;
+export interface Interactible extends Tile {
+    interaction(): void;
 }

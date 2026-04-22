@@ -1,35 +1,46 @@
-import { inject } from "@angular/core";
-import { Interactible } from "./interactible";
+import { inject, signal, WritableSignal } from "@angular/core";
 import { Hero } from "../../hero-sheet/services/hero";
+import { Tile } from "./tile";
 
-export class Monster extends Interactible {
-    private _monsterDead: boolean = false;
+export class Monster implements Tile {
+    
     private hero = inject(Hero);
+    private _monsterHp: number | undefined;
+    style: WritableSignal<string>;
+    walkable: boolean = true;
+    interactible: boolean = true;
+    dead: boolean = false;
 
     constructor(monsterHp?: number) {
-        super();
-        super.style.set("monster");
-        this.value = monsterHp; //Monster HP
+        this.style = signal("monster");
+        this._monsterHp = monsterHp; //Monster HP
     }
 
-    override description(): string {
+    description(): string {
         return "Monster";
     }
 
-    kill() {
-        this._monsterDead = true;
-        super.style.set("dead-monster");
+    value(): number | undefined {
+        return this._monsterHp;
     }
 
     interaction(): void {
+        if (!this.dead) {
+
         console.info("Interaction avec un monstre");
-        if (this.value == undefined) {
+        if (this._monsterHp == undefined) {
             this.hero.random();
-            this.value == this.hero.dice_result();
+            this._monsterHp == this.hero.dice_result();
         }
         this.kill();
         this.hero.current_hp.update((currentHp) => {
-            return currentHp - (this.value ?? 0);
+            return currentHp - (this._monsterHp ?? 0);
         })
+        }
+    }
+
+    kill(): void {
+        this.dead = true;
+        this.style.set("dead-monster");
     }
 }

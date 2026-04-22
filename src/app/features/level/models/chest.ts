@@ -1,23 +1,34 @@
-import { Item } from './item';
+import { signal, WritableSignal } from '@angular/core';
+import { Tile } from './tile';
 
-export class Chest extends Item {
+export class Chest implements Tile {
+  private _chestValue: number | undefined;
+  style: WritableSignal<string>;
+  walkable: boolean = true;
+  interactible: boolean = true;
+  looted: boolean = false;
 
-  constructor(value?: number) {
-    super();
-    this.value = value;
-    this.style.set('chest-closed');
+  constructor() {
+    this.style = signal('chest-closed');
   }
 
-  override description(): string {
+  description(): string {
     return 'Treasure chest';
   }
 
-  override loot(): void {
-    super.looted = true;
-    super.style.set('chest-opened');
+  value(): number | undefined {
+    return this._chestValue;
+  }
+
+  loot(): void {
+    this.looted = true;
+    this.style.set('chest-opened');
   }
 
   interaction(): void {
-    console.info("Interaction avec un coffre");
+    if (!this.looted) {
+      console.info('Interaction avec un coffre');
+      this.loot();
+    }
   }
 }

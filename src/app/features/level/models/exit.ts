@@ -1,16 +1,20 @@
-import { Interactible } from './interactible';
+import { signal, WritableSignal } from '@angular/core';
+import { Tile } from './tile';
 
-export class Exit extends Interactible {
+export class Exit implements Tile {
+  walkable: boolean = true;
+  style: WritableSignal<string>;
+  interactible: boolean = true;
+
   constructor() {
-    super();
-    this.style.set('exit');
+    this.style = signal('exit');
   }
 
-  override description(): string {
+  description(): string {
     return 'Sortie';
   }
 
   interaction(): void {
-    console.info("Interaction avec la sortie");
+    console.info('Interaction avec la sortie');
   }
 }

@@ -1,0 +1,25 @@
+import { signal, WritableSignal } from '@angular/core';
+
+export abstract class Tile {
+  private _canBeVisited: boolean = true;
+  private _style: WritableSignal<string>;
+
+  constructor() {
+    this._style = signal("");
+  }
+
+  abstract description?(): string;
+  abstract value?(): number | undefined;
+
+  get style(): WritableSignal<string> {
+    return this._style;
+  }
+
+  get canBeVisited(): boolean {
+    return this._canBeVisited;
+  }
+
+  set canBeVisited(allowVisit: boolean) {
+    this._canBeVisited = allowVisit;
+  }
+}

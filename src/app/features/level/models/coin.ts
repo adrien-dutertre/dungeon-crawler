@@ -1,22 +1,34 @@
-import { Item } from './item';
+import { signal, WritableSignal } from '@angular/core';
+import { Tile } from './tile';
 
-export class Coin extends Item {
+export class Coin implements Tile {
+  private _coinValue: number = 1;
+  style: WritableSignal<string>;
+  walkable: boolean = true;
+  looted: boolean = false;
+  interactible: boolean = true;
+
   constructor() {
-    super();
-    this.value = 1;
-    this.style.set("coin");
+    this.style = signal('coin');
   }
 
-  override description(): string {
+  description(): string {
     return 'Coin';
   }
 
-  override loot(): void {
-    super.looted = true;
-    super.style.set('');
+  value(): number | undefined {
+    return this._coinValue;
+  }
+
+  loot(): void {
+    this.looted = true;
+    this.style.set('');
   }
 
   interaction(): void {
-    console.info("Interaction avec une pièce");
+    if (!this.looted) {
+      console.info('Interaction avec une pièce');
+      this.loot();
+    }
   }
 }

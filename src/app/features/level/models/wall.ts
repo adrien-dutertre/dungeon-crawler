@@ -1,9 +1,13 @@
-import { Decor } from './decor';
+import { signal, WritableSignal } from '@angular/core';
+import { Tile } from './tile';
 
-export class Wall extends Decor {
-  constructor(walkable: boolean) {
-    super();
-    this.style.set(walkable ? "wall2" : "wall1");
-    this.canBeVisited = false;
+export class Wall implements Tile {
+    style: WritableSignal<string>;
+    walkable: boolean = false;
+    interactible: boolean = false;
+
+  constructor(hardWall: boolean) {
+    this.style= signal(hardWall ? "wall1" : "wall2");
+    this.walkable = false;
   }
 }

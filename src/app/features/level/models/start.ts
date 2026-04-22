@@ -1,9 +1,13 @@
-import { Decor } from "./decor";
+import { signal, WritableSignal } from "@angular/core";
+import { Tile } from "./tile";
 
-export class Start extends Decor {
+export class Start implements Tile {
+  style: WritableSignal<string>;
+  walkable: boolean = true;
+  interactible: boolean = false;
 
   constructor() {
-    super();
-    this.style.set("start");
+    this.style= signal("start");
   }
+
 }

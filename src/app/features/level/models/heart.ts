@@ -1,23 +1,35 @@
-import { Item } from "./item";
+import { signal, WritableSignal } from "@angular/core";
+import { Tile } from "./tile";
 
-export class Heart extends Item {
+export class Heart implements Tile {
+  private _heartValue: number | undefined;
+  style: WritableSignal<string>;
+  walkable: boolean=true;
+  looted: boolean=false;
+  interactible: boolean = true;
 
   constructor(value?: number) {
-    super();
-    this.value = value;
-    this.style.set("life");
+    this.style=signal("life");
+    this._heartValue = value;
   }
 
-  override description(): string {
+  description(): string {
     return 'Health potion';
   }
 
-  override loot() : void {
-    super.looted = true;
-    super.style.set('');
+  value(): number | undefined {
+    return this._heartValue;
+  }
+
+  loot() : void {
+    this.looted = true;
+    this.style.set('');
   }
 
   interaction(): void {
-    console.info("Interaction avec un cœur");
+    if (!this.looted) {
+      console.info("Interaction avec un cœur");
+      this.loot();
+    }
   }
 }

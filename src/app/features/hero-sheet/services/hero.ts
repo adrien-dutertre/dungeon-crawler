@@ -1,7 +1,12 @@
+import { Item } from './../../level/models/item';
 import { Interactible } from '../../level/models/interactible';
 import { Tile } from '../../level/models/tile';
 import { Inventary } from './../models/inventary';
 import { Injectable, signal, computed } from '@angular/core';
+import { Monster } from '../../level/models/monster';
+import { Heart } from '../../level/models/heart';
+import { Coin } from '../../level/models/coin';
+import { Chest } from '../../level/models/chest';
 
 @Injectable({
   providedIn: 'root',
@@ -111,12 +116,12 @@ export class Hero {
   }
 
   canWalkThere(direction: number): boolean {
-    return this.levelContext[(this.position() - 1) + (this.moving.get(direction) ?? 0)].canBeVisited;
+    return this.levelContext[(this.position() - 1) + (this.moving.get(direction) ?? 0)].walkable;
   }
 
   checkEvent(): void {
     const currentTile: Tile = this.levelContext[this.position() - 1];
-    if (currentTile instanceof Interactible) {
+    if (currentTile.interactible && currentTile.interaction) {
       currentTile.interaction();
     }
   }
