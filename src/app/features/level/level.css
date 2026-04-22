@@ -69,4 +69,5 @@
     background-image: url("../../../../public/sprites/hero-1.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    transition: all 1s;
 }

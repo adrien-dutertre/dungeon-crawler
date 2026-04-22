@@ -9,4 +9,8 @@ export class Exit extends Interactible {
   override description(): string {
     return 'Sortie';
   }
+
+  interaction(): void {
+    console.info("Interaction avec la sortie");
+  }
 }

@@ -16,4 +16,8 @@ export class Heart extends Item {
     super.looted = true;
     super.style.set('');
   }
+
+  interaction(): void {
+    console.info("Interaction avec un cœur");
+  }
 }

@@ -1,5 +1,5 @@
 import { Tile } from './tile';
 
-export class Interactible extends Tile {
-
+export abstract class Interactible extends Tile {
+    abstract interaction(): void;
 }

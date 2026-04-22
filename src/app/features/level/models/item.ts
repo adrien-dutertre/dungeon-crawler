@@ -1,6 +1,6 @@
 import { Interactible } from './interactible';
 
-export class Item extends Interactible {
+export abstract class Item extends Interactible {
   private _looted: boolean = false;
 
   loot() {}

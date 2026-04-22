@@ -1,3 +1,4 @@
+import { Interactible } from '../../level/models/interactible';
 import { Tile } from '../../level/models/tile';
 import { Inventary } from './../models/inventary';
 import { Injectable, signal, computed } from '@angular/core';
@@ -55,31 +56,68 @@ export class Hero {
   }
 
   // Action de mouvement
-  moveHero() {
+  heroTurn() {
     this.moves.set(this.dice_result());
-    
+    this.allowedDirections();
   }
 
   // Directions possible pour les boutons
   allowedDirections(): void {
     if (this.dice_result() % 2 == 0) {
       //Résultat pair : le mouvement se fait en vertical ou diagonal
-      this.allowedDirection.set([false, true, false, true, false, true, false, true, false]);
+      this.allowedDirection.set([
+          false,
+          true && this.canWalkThere(1),
+          false,
+          true && this.canWalkThere(3),
+          false,
+          true && this.canWalkThere(5),
+          false,
+          true && this.canWalkThere(7),
+          false
+        ]);
+
     } else {
       //Résultat impair : le mouvement se fait en diagonal
-      this.allowedDirection.set([true, false, true, false, false, false, true, false, true]);
+      this.allowedDirection.set([
+        true && this.canWalkThere(0),
+        false,
+        true && this.canWalkThere(2),
+        false,
+        false,
+        false,
+        true && this.canWalkThere(6),
+        false,
+        true && this.canWalkThere(8)
+      ]);
     }
   }
 
+  // Mouvement du héros
   move(direction: number) {
     this.direction.set(direction);
     this.position.update((currentPosition: number) => {
-      return currentPosition + (this.moving.get(direction) ?? 0) * this.moves();
+      return currentPosition + (this.moving.get(direction) ?? 0);
     });
-    this.moves.set(0);
+    this.checkEvent();
+    this.moves.update((currentNumberOfMoves) => {
+      return currentNumberOfMoves - 1;
+    });
+    if ((this.moves() > 0) && this.canWalkThere(this.direction())) {
+      this.move(this.direction());
+    } else {
+      this.allowedDirections();
+    }
   }
 
-  canWalkThere(): boolean {
-    return this.levelContext[this.position() + (this.moving.get(this.direction()) ?? 0)].canBeVisited;
+  canWalkThere(direction: number): boolean {
+    return this.levelContext[(this.position() - 1) + (this.moving.get(direction) ?? 0)].canBeVisited;
+  }
+
+  checkEvent(): void {
+    const currentTile: Tile = this.levelContext[this.position() - 1];
+    if (currentTile instanceof Interactible) {
+      currentTile.interaction();
+    }
   }
 }

@@ -5,4 +5,8 @@ export class Trap extends Interactible {
     super();
     this.style.set("trap");
   }
+
+  interaction(): void {
+    console.info("Interaction avec un coffre")
+  }
 }

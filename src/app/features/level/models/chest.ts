@@ -16,4 +16,8 @@ export class Chest extends Item {
     super.looted = true;
     super.style.set('chest-opened');
   }
+
+  interaction(): void {
+    console.info("Interaction avec un coffre");
+  }
 }

@@ -21,7 +21,7 @@ export class HeroSheet {
 
   move(): void {
     this.throwDice();
-    this.hero.moveHero();
+    this.hero.heroTurn();
   }
   
   throwDice(): void {
