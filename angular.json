@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "paper-dungeon": {
+    "dungeon-crawler": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:class": {
@@ -41,8 +41,8 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "baseHref": "/paper-dungeon/",
-            "outputPath": "dist/paper-dungeon",
+            "baseHref": "/dungeon-crawler/",
+            "outputPath": "dist/dungeon-crawler",
             "index": {
               "input": "src/index.html",
               "output": "index.html"
@@ -55,7 +55,9 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"]
+            "styles": [
+              "src/styles.css"
+            ]
           },
           "configurations": {
             "production": {
@@ -85,10 +87,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "paper-dungeon:build:production"
+              "buildTarget": "dungeon-crawler:build:production"
             },
             "development": {
-              "buildTarget": "paper-dungeon:build:development"
+              "buildTarget": "dungeon-crawler:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,10 +98,10 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "name" : "Adrien Dutertre",
-            "baseHref" : "https://adrien-dutertre.github.io/paper-dungeon/",
-            "email" : "dutertre.adrien@pm.me",
-            "dir" : "dist/paper-dungeon/browser"
+            "name": "Adrien Dutertre",
+            "baseHref": "https://adrien-dutertre.github.io/dungeon-crawler/",
+            "email": "dutertre.adrien@pm.me",
+            "dir": "dist/dungeon-crawler/browser"
           }
         }
       }
