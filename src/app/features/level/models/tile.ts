@@ -1,7 +1,7 @@
 import { WritableSignal } from "@angular/core";
 
 export interface Tile {
-    style: WritableSignal<string>;
+    source: WritableSignal<string>;
     interactible: boolean;
     walkable: boolean;
     looted?: boolean;

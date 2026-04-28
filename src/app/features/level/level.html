@@ -1,22 +1,21 @@
-<h2 class="p-2 font-mono text-lg font-bold w-full justify-self-start">Niveau {{ floor() }}</h2>
+<h2 class="p-2 font-mono text-lg font-bold w-full sm:max-w-96 justify-self-start">Niveau {{ floor() }}</h2>
 <div class="grid grid-cols-15 grid-rows-15 aspect-square sm:max-w-96 w-full relative">
-    @for (tile of level(); track $index) {
-    <div>
-        @if (tile.interactible && (tile.value) && (tile.description) && ((!tile.looted) || (!tile.dead))) {
+    @for (tile of level.context(); track $index) {
+    <div class="w-full h-auto aspect-square border border-neutral-100">
+
+        @if (tile.interactible && ((tile.value) && (tile.description))) {
         <p-overlaybadge [value]="tile.value() ?? '?'" severity="secondary" badgeSize="small">
-            <div [class]="tile.style()"
-                 class="w-full aspect-square border border-neutral-100"
-                 (click)="pop.toggle($event)">
-            </div>
+            <img [ngSrc]="tile.source()" width="32" height="32" (click)="pop.toggle($event)">
         </p-overlaybadge>
         <p-popover #pop>
             <p>{{ tile.description() }}</p>
         </p-popover>
         } @else {
-        <div [class]="tile.style()" class="w-full aspect-square border border-neutral-100">
-        </div>
+        <img [ngSrc]="tile.source()" width="32" height="32">
         }
     </div>
     }
-    <div id="hero" class="hero absolute w-1/15 aspect-square outline-2 outline-blue-500 outline-offset-2 z-10" [style]="currentPosition()"></div>
+    <div id="hero" class="hero absolute w-1/15 aspect-square outline-2 outline-blue-500 outline-offset-2 z-10"
+        [style]="hero.calculatedPosition()">
+    </div>
 </div>

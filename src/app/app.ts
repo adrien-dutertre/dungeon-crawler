@@ -1,8 +1,8 @@
 import { HeroSheet } from './features/hero-sheet/hero-sheet';
 import { Component } from '@angular/core';
-import { Level } from "./features/level/level";
+import { Level } from './features/level/level';
 import { MessageModule } from 'primeng/message';
-import { Navbar } from "./shared/components/navbar/navbar";
+import { Navbar } from './shared/components/navbar/navbar';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,4 @@ import { Navbar } from "./shared/components/navbar/navbar";
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App {
-  
-}
+export class App {}

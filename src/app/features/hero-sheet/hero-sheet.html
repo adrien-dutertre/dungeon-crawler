@@ -7,7 +7,7 @@
         <p-divider layout="vertical" />
         <div class="p-1">
             <i class="pi pi-database" style="font-size: 1.5rem; color: var(--color-yellow-500)"></i><span
-                class="ml-2">{{ hero.current_coin() }}</span>
+                class="ml-2">{{ hero.current_coins() }}</span>
         </div>
     </div>
     <p-button label="Inventaire" icon="pi pi-shopping-bag" class="ml-auto" severity="secondary"
@@ -21,33 +21,30 @@
         </ul>
     </p-drawer>
 </div>
-@if (hero.moves() == 0) {
-<div>
-    <p-button label="Se déplacer" [raised]="true" size="large" (onClick)="move()" />
+@if (hero.moves() > 0) {
+<div class="grid grid-cols-3 grid-rows-3 aspect-square justify-center items-center">
+    <p-button icon="pi pi-arrow-up-left" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[0]"
+        [raised]="logic.allowedDirection()[0]" (onClick)="logic.chooseDirection(0)" />
+    <p-button icon="pi pi-arrow-up" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[1]"
+        [raised]="logic.allowedDirection()[1]" (onClick)="logic.chooseDirection(1)" />
+    <p-button icon="pi pi-arrow-up-right" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[2]"
+        [raised]="logic.allowedDirection()[2]" (onClick)="logic.chooseDirection(2)" />
+    <p-button icon="pi pi-arrow-left" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[3]"
+        [raised]="logic.allowedDirection()[3]" (onClick)="logic.chooseDirection(3)" />
+    <div>{{ hero.moves() }}</div>
+    <p-button icon="pi pi-arrow-right" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[5]"
+        [raised]="logic.allowedDirection()[5]" (onClick)="logic.chooseDirection(5)" />
+    <p-button icon="pi pi-arrow-down-left" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[6]"
+        [raised]="logic.allowedDirection()[6]" (onClick)="logic.chooseDirection(6)" />
+    <p-button icon="pi pi-arrow-down" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[7]"
+        [raised]="logic.allowedDirection()[7]" (onClick)="logic.chooseDirection(7)" />
+    <p-button icon="pi pi-arrow-down-right" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[8]"
+        [raised]="logic.allowedDirection()[8]" (onClick)="logic.chooseDirection(8)" />
 </div>
 } @else {
-<div class="grid grid-cols-3 grid-rows-3 aspect-square">
-    <p-button icon="pi pi-arrow-up-left" size="large" variant="outlined" [disabled]="!hero.allowedDirection()[0]"
-        [raised]="hero.allowedDirection()[0]" (onClick)="hero.move(0)" />
-    <p-button icon="pi pi-arrow-up" size="large" variant="outlined" [disabled]="!hero.allowedDirection()[1]"
-        [raised]="hero.allowedDirection()[1]" (onClick)="hero.move(1)" />
-    <p-button icon="pi pi-arrow-up-right" size="large" variant="outlined" [disabled]="!hero.allowedDirection()[2]"
-        [raised]="hero.allowedDirection()[2]" (onClick)="hero.move(2)" />
-    <p-button icon="pi pi-arrow-left" size="large" variant="outlined" [disabled]="!hero.allowedDirection()[3]"
-        [raised]="hero.allowedDirection()[3]" (onClick)="hero.move(3)" />
-    <div></div>
-    <p-button icon="pi pi-arrow-right" size="large" variant="outlined" [disabled]="!hero.allowedDirection()[5]"
-        [raised]="hero.allowedDirection()[5]" (onClick)="hero.move(5)" />
-    <p-button icon="pi pi-arrow-down-left" size="large" variant="outlined" [disabled]="!hero.allowedDirection()[6]"
-        [raised]="hero.allowedDirection()[6]" (onClick)="hero.move(6)" />
-    <p-button icon="pi pi-arrow-down" size="large" variant="outlined" [disabled]="!hero.allowedDirection()[7]"
-        [raised]="hero.allowedDirection()[7]" (onClick)="hero.move(7)" />
-    <p-button icon="pi pi-arrow-down-right" size="large" variant="outlined" [disabled]="!hero.allowedDirection()[8]"
-        [raised]="hero.allowedDirection()[8]" (onClick)="hero.move(8)" />
+<div>
+    <p-button label="Se déplacer" [raised]="true" size="large" (onClick)="logic.startTurn()" />
 </div>
 }
-<p-dialog header="Lancer le Dé" [(visible)]="diceDialogVisible" [modal]="true" closable="false"
-    [style]="{width: '90%'}">
-    <p>Résultat du dé : {{ hero.dice_result() }}</p>
-    <p-button label="Ok" (onClick)="diceDialogVisible = false" />
-</p-dialog>
+<app-dice-modal></app-dice-modal>
+<app-confirm-dialog />

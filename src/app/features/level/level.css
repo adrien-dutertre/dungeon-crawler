@@ -5,66 +5,6 @@
     align-items: center;
 }
 
-.wall1 {
-    background-image: url("../../../../public/sprites/wall-1.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.wall2 {
-    background-image: url("../../../../public/sprites/wall-2.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.start {
-    background-image: url("../../../../public/sprites/start.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.exit {
-    background-image: url("../../../../public/sprites/exit.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.monster {
-    background-image: url("../../../../public/sprites/monster.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.chest-closed {
-    background-image: url("../../../../public/sprites/chest-closed.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.trap {
-    background-image: url("../../../../public/sprites/trap.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.coin {
-    background-image: url("../../../../public/sprites/coins.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.life {
-    background-image: url("../../../../public/sprites/life.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.dead-monster {
-    background-image: url("../../../../public/sprites/monster-dead.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
 .hero {
     background-image: url("../../../../public/sprites/hero-1.png");
     background-repeat: no-repeat;

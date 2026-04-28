@@ -1,46 +1,45 @@
-import { inject, signal, WritableSignal } from "@angular/core";
-import { Hero } from "../../hero-sheet/services/hero";
-import { Tile } from "./tile";
+import { inject, signal, WritableSignal } from '@angular/core';
+import { Hero } from '../../hero-sheet/services/hero';
+import { Tile } from './tile';
+import { Dice } from '../../../shared/components/dice-modal/services/dice';
 
 export class Monster implements Tile {
-    
-    private hero = inject(Hero);
-    private _monsterHp: number | undefined;
-    style: WritableSignal<string>;
-    walkable: boolean = true;
-    interactible: boolean = true;
-    dead: boolean = false;
+  private hero = inject(Hero);
+  private dice = inject(Dice);
+  private _monsterHp: number | undefined;
+  source: WritableSignal<string>;
+  walkable: boolean = true;
+  interactible: boolean = true;
+  dead: boolean = false;
 
-    constructor(monsterHp?: number) {
-        this.style = signal("monster");
-        this._monsterHp = monsterHp; //Monster HP
+  constructor(monsterHp?: number) {
+    this.source = signal('/sprites/monster.png');
+    this._monsterHp = monsterHp; //Monster HP
+  }
+
+  description(): string {
+    return 'Monster';
+  }
+
+  value(): number | undefined {
+    return this._monsterHp;
+  }
+
+  interaction(): void {
+    if (!this.dead) {
+      console.info('Un monstre de vous attaque !');
+      if (this._monsterHp == undefined) {
+        this.dice.throw(3);
+        this._monsterHp = this.dice.result();
+      }
+      this.kill();
+      this.hero.hit(this._monsterHp);
     }
+  }
 
-    description(): string {
-        return "Monster";
-    }
-
-    value(): number | undefined {
-        return this._monsterHp;
-    }
-
-    interaction(): void {
-        if (!this.dead) {
-
-        console.info("Interaction avec un monstre");
-        if (this._monsterHp == undefined) {
-            this.hero.random();
-            this._monsterHp == this.hero.dice_result();
-        }
-        this.kill();
-        this.hero.current_hp.update((currentHp) => {
-            return currentHp - (this._monsterHp ?? 0);
-        })
-        }
-    }
-
-    kill(): void {
-        this.dead = true;
-        this.style.set("dead-monster");
-    }
+  kill(): void {
+    this.dead = true;
+    this.source.set('/sprites/monster-dead.png');
+    this.interactible = false;
+  }
 }

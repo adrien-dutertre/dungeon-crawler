@@ -1,0 +1,5 @@
+<p-dialog [header]="dice.modalTitle()" [(visible)]="diceDialogVisible" [modal]="true" closable="false"
+    [style]="{width: 'clamp(320px, 90%, 320px)'}">
+    <p>Résultat du dé : {{ dice.result() }}</p>
+    <p-button label="Ok" (onClick)="dice.closeModal()" />
+</p-dialog>

@@ -1,13 +1,17 @@
-import { signal, WritableSignal } from '@angular/core';
+import { inject, signal, WritableSignal } from '@angular/core';
 import { Tile } from './tile';
+import { ConfirmationService } from 'primeng/api';
+import { GameLogic } from '../../../shared/services/game-logic';
 
 export class Exit implements Tile {
+  source: WritableSignal<string>;
   walkable: boolean = true;
-  style: WritableSignal<string>;
   interactible: boolean = true;
+  private confirmationService = inject(ConfirmationService);
+  // private logic = inject(GameLogic);
 
   constructor() {
-    this.style = signal('exit');
+    this.source = signal('/sprites/exit.png');
   }
 
   description(): string {
@@ -15,6 +19,15 @@ export class Exit implements Tile {
   }
 
   interaction(): void {
-    console.info('Interaction avec la sortie');
+    console.info('Sortie du niveau.');
+    this.confirmationService.confirm({
+      message: 'Voulez-vous quitter le niveau ?',
+      header: 'Fin du niveau',
+      rejectLabel: 'Non, rester',
+      acceptLabel: 'Oui, quitter',
+      accept: () => {
+        //this.logic;
+      },
+    });
   }
 }

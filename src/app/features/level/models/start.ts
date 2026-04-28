@@ -1,13 +1,12 @@
-import { signal, WritableSignal } from "@angular/core";
-import { Tile } from "./tile";
+import { signal, WritableSignal } from '@angular/core';
+import { Tile } from './tile';
 
 export class Start implements Tile {
-  style: WritableSignal<string>;
+  source: WritableSignal<string>;
   walkable: boolean = true;
   interactible: boolean = false;
 
   constructor() {
-    this.style= signal("start");
+    this.source = signal('/sprites/start.png');
   }
-
 }

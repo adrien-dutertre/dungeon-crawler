@@ -1,15 +1,17 @@
-import { signal, WritableSignal } from '@angular/core';
+import { inject, signal, WritableSignal } from '@angular/core';
 import { Tile } from './tile';
+import { Hero } from '../../hero-sheet/services/hero';
 
 export class Coin implements Tile {
+  private hero = inject(Hero);
   private _coinValue: number = 1;
-  style: WritableSignal<string>;
+  source: WritableSignal<string>;
   walkable: boolean = true;
   looted: boolean = false;
   interactible: boolean = true;
 
   constructor() {
-    this.style = signal('coin');
+    this.source = signal('/sprites/coins.png');
   }
 
   description(): string {
@@ -22,12 +24,14 @@ export class Coin implements Tile {
 
   loot(): void {
     this.looted = true;
-    this.style.set('');
+    this.source.set('/sprites/floor.png');
+    this.interactible = false;
   }
 
   interaction(): void {
     if (!this.looted) {
-      console.info('Interaction avec une pièce');
+      console.info('Vous trouvez une pièce !');
+      this.hero.getCoins(this._coinValue);
       this.loot();
     }
   }

@@ -1,15 +1,19 @@
-import { signal, WritableSignal } from "@angular/core";
-import { Tile } from "./tile";
+import { inject, signal, WritableSignal } from '@angular/core';
+import { Tile } from './tile';
+import { Hero } from '../../hero-sheet/services/hero';
+import { Dice } from '../../../shared/components/dice-modal/services/dice';
 
 export class Heart implements Tile {
+  private hero = inject(Hero);
+  private dice = inject(Dice);
   private _heartValue: number | undefined;
-  style: WritableSignal<string>;
-  walkable: boolean=true;
-  looted: boolean=false;
+  source: WritableSignal<string>;
+  walkable: boolean = true;
+  looted: boolean = false;
   interactible: boolean = true;
 
   constructor(value?: number) {
-    this.style=signal("life");
+    this.source = signal('/sprites/life.png');
     this._heartValue = value;
   }
 
@@ -21,15 +25,21 @@ export class Heart implements Tile {
     return this._heartValue;
   }
 
-  loot() : void {
+  loot(): void {
     this.looted = true;
-    this.style.set('');
+    this.source.set('/sprites/floor.png');
+    this.interactible = false;
   }
 
   interaction(): void {
     if (!this.looted) {
-      console.info("Interaction avec un cœur");
+      console.info('Vous trouvez une potion de vie !');
+      if (this._heartValue == undefined) {
+        this.dice.throw(2);
+        this._heartValue = this.dice.result();
+      }
       this.loot();
+      this.hero.heal(this._heartValue);
     }
   }
 }
