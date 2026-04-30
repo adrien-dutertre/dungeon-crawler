@@ -1,9 +1,8 @@
-import { inject, signal, WritableSignal } from '@angular/core';
+import { signal, WritableSignal } from '@angular/core';
 import { Tile } from './tile';
-import { Hero } from '../../hero-sheet/services/hero';
+import { Interaction } from '../../../shared/services/interaction';
 
 export class Coin implements Tile {
-  private hero = inject(Hero);
   private _coinValue: number = 1;
   source: WritableSignal<string>;
   walkable: boolean = true;
@@ -28,11 +27,15 @@ export class Coin implements Tile {
     this.interactible = false;
   }
 
-  interaction(): void {
+  interaction(): Interaction {
     if (!this.looted) {
       console.info('Vous trouvez une pièce !');
-      this.hero.getCoins(this._coinValue);
       this.loot();
+      return {
+        coinLoot: true,
+        coins: this._coinValue,
+      };
     }
+    return {};
   }
 }

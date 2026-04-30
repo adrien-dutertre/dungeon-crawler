@@ -1,11 +1,9 @@
-import { inject, signal, WritableSignal } from '@angular/core';
-import { Hero } from '../../hero-sheet/services/hero';
+import { signal, WritableSignal } from '@angular/core';
+
 import { Tile } from './tile';
-import { Dice } from '../../../shared/components/dice-modal/services/dice';
+import { Interaction } from '../../../shared/services/interaction';
 
 export class Monster implements Tile {
-  private hero = inject(Hero);
-  private dice = inject(Dice);
   private _monsterHp: number | undefined;
   source: WritableSignal<string>;
   walkable: boolean = true;
@@ -25,16 +23,16 @@ export class Monster implements Tile {
     return this._monsterHp;
   }
 
-  interaction(): void {
+  interaction(): Interaction {
     if (!this.dead) {
       console.info('Un monstre de vous attaque !');
-      if (this._monsterHp == undefined) {
-        this.dice.throw(3);
-        this._monsterHp = this.dice.result();
-      }
       this.kill();
-      this.hero.hit(this._monsterHp);
+      return {
+        heroHit: true,
+        health: this._monsterHp,
+      };
     }
+    return {};
   }
 
   kill(): void {

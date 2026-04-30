@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PopoverModule } from 'primeng/popover';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { Hero } from '../hero-sheet/services/hero';
@@ -12,7 +12,6 @@ import { LevelService } from './services/level.service';
   styleUrl: './level.css',
 })
 export class Level {
-  readonly floor = input.required();
-  readonly level = inject(LevelService);
-  readonly hero = inject(Hero);
+  protected level = inject(LevelService);
+  protected hero = inject(Hero);
 }

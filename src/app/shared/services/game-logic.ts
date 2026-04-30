@@ -1,9 +1,12 @@
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { Interaction } from './interaction';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Hero } from '../../features/hero-sheet/services/hero';
 import { Dice } from '../components/dice-modal/services/dice';
 import { Tile } from '../../features/level/models/tile';
 import { LevelService } from '../../features/level/services/level.service';
+import { ConfirmationService } from 'primeng/api';
 import { Events } from './events';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +15,8 @@ export class GameLogic {
   private hero = inject(Hero);
   private dice = inject(Dice);
   private level = inject(LevelService);
+  private confirmationService = inject(ConfirmationService);
+  private router = inject(Router);
 
   private cardinal_movement = signal<boolean>(true);
 
@@ -54,6 +59,11 @@ export class GameLogic {
         ];
   });
 
+  // Initier le jeu
+  init(): void {
+    this.hero.move(this.level.start() + 1);
+  }
+
   // Initier un tour
   startTurn(): void {
     this.dice.throw(0);
@@ -95,15 +105,98 @@ export class GameLogic {
 
   // Est-ce que le joueur peut se déplacer sur la case ?
   canWalkThere(direction: number): boolean {
-    return this.level.context()[this.hero.position() - 1 + (this.moving.get(direction) ?? 0)]
+    return this.level.current()[this.hero.position() - 1 + (this.moving.get(direction) ?? 0)]
       .walkable;
   }
 
   // Evènement sur la case
   checkEvent(): void {
-    const currentTile: Tile = this.level.context()[this.hero.position() - 1];
+    const currentTile: Tile = this.level.current()[this.hero.position() - 1];
     if (currentTile.interactible && currentTile.interaction) {
-      currentTile.interaction();
+      this.resolveEvent(currentTile.interaction());
     }
+  }
+
+  // Résoudre l'évènement
+  resolveEvent(interaction: Interaction): void {
+    // Gain de pièces
+    if (interaction.coinLoot) {
+      let coins = interaction.coins;
+      if (coins == undefined) {
+        this.dice.throw(1);
+        coins = this.dice.result();
+      }
+      this.hero.getCoins(coins);
+    }
+    // Perte de pièces
+    if (interaction.coinLost) {
+      let coins = interaction.coins;
+      if (coins == undefined) {
+        this.dice.throw(1);
+        coins = this.dice.result();
+      }
+      this.hero.loseCoins(coins);
+    }
+    // Soin du héros
+    if (interaction.heroHeal) {
+      let health = interaction.health;
+      if (health == undefined) {
+        this.dice.throw(2);
+        health = this.dice.result();
+      }
+      this.hero.heal(health);
+    }
+    // Dommages du héros
+    if (interaction.heroHit) {
+      let damages = interaction.health;
+      if (damages == undefined) {
+        this.dice.throw(3);
+        damages = this.dice.result();
+      }
+      this.hero.hit(damages);
+    }
+    if (interaction.heroStop) {
+      this.hero.moves.set(0);
+    }
+    if (interaction.exit) {
+      this.confirmationService.confirm({
+        message: 'Voulez-vous quitter le niveau ?',
+        header: 'Fin du niveau',
+        rejectLabel: 'Non, rester',
+        acceptLabel: 'Oui, quitter',
+        accept: () => {
+          this.endOfLevel();
+        },
+      });
+    }
+  }
+
+  endOfLevel(): void {
+    if (this.checkHero()) {
+      this.nextLevel();
+    } else {
+      this.endOfGame();
+    }
+  }
+
+  checkHero(): boolean {
+    return this.hero.current_hp() > 0;
+  }
+
+  nextLevel(): void {
+    if (this.hero.current_coins() < 0) {
+      this.hero.current_coins.set(0);
+    }
+    if (this.hero.current_hp() > this.hero.MAX_HP()) {
+      this.hero.current_hp.set(this.hero.MAX_HP());
+    }
+    this.hero.moves.set(0);
+    this.hero.current_level++;
+    this.router.navigate(['/level', this.hero.current_level]);
+  }
+
+  endOfGame(): void {
+    this.hero.reset();
+    this.router.navigate(['']);
   }
 }

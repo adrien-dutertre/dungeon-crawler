@@ -1,6 +1,7 @@
-<h2 class="p-2 font-mono text-lg font-bold w-full sm:max-w-96 justify-self-start">Niveau {{ floor() }}</h2>
+<h2 class="p-2 font-mono text-lg font-bold w-full sm:max-w-96 justify-self-start">Niveau {{ level.floor() }}
+</h2>
 <div class="grid grid-cols-15 grid-rows-15 aspect-square sm:max-w-96 w-full relative">
-    @for (tile of level.context(); track $index) {
+    @for (tile of level.current(); track $index) {
     <div class="w-full h-auto aspect-square border border-neutral-100">
 
         @if (tile.interactible && ((tile.value) && (tile.description))) {

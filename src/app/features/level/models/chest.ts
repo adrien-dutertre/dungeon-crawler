@@ -1,11 +1,8 @@
-import { inject, signal, WritableSignal, computed, effect } from '@angular/core';
+import { Interaction } from './../../../shared/services/interaction';
+import { signal, WritableSignal } from '@angular/core';
 import { Tile } from './tile';
-import { Hero } from '../../hero-sheet/services/hero';
-import { Dice } from '../../../shared/components/dice-modal/services/dice';
 
 export class Chest implements Tile {
-  private hero = inject(Hero);
-  private dice = inject(Dice);
   private _chestValue: number | undefined;
   source: WritableSignal<string>;
   walkable: boolean = true;
@@ -30,13 +27,15 @@ export class Chest implements Tile {
     this.interactible = false;
   }
 
-  interaction(): void {
+  interaction(): Interaction {
     if (!this.looted) {
       console.info('Vous ouvrez un coffre.');
-      this.dice.throw(1);
-      this._chestValue = this.dice.result();
       this.loot();
-      this.hero.getCoins(this._chestValue);
+      return {
+        coinLoot: true,
+        coins: this._chestValue,
+      };
     }
+    return {};
   }
 }
