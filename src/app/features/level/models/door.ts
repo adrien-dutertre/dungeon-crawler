@@ -2,25 +2,19 @@ import { signal, WritableSignal } from '@angular/core';
 import { Tile } from './tile';
 import { Interaction } from '../../../shared/services/interaction';
 
-export class Trap implements Tile {
+export class Door implements Tile {
   source: WritableSignal<string>;
-  walkable: boolean = true;
   interactible: boolean = true;
+  walkable: boolean = false;
 
   constructor() {
-    this.source = signal('/sprites/trap.png');
+    this.source = signal('/sprites/door.png');
   }
 
   description(): string {
-    return 'Piège';
+    return 'Porte fermée';
   }
-
   interaction(): Interaction {
-    console.info('Vous êtes tombés dans un piège !');
-    return {
-      coinLost: true,
-      coins: undefined,
-      heroStop: true,
-    };
+    return {};
   }
 }

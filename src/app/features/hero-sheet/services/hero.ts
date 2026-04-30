@@ -12,7 +12,7 @@ export class Hero {
 
   current_coins = signal<number>(0);
 
-  position = signal<number>(47);
+  position = signal<number>(0);
   private readonly top = computed(() => {
     return (this.position() - 1) % 15;
   });
@@ -69,5 +69,13 @@ export class Hero {
     this.current_coins.update((currentCoins) => {
       return currentCoins + coins_gained;
     });
+  }
+
+  // Réinitialisation du héros
+  reset(): void {
+    this.current_level = 1;
+    this.MAX_HP.set(10);
+    this.current_hp.set(this.MAX_HP());
+    this.current_coins.set(0);
   }
 }

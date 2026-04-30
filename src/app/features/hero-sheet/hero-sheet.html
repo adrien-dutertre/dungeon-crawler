@@ -11,7 +11,7 @@
         </div>
     </div>
     <p-button label="Inventaire" icon="pi pi-shopping-bag" class="ml-auto" severity="secondary"
-        (click)="inventaryVisibility = true" />
+        (click)="inventaryVisibility = true" disabled />
     <p-drawer header="Inventaire" position="bottom" dismissible="false" [(visible)]="inventaryVisibility"
         [style]="{ height: 'auto' }">
         <ul>
