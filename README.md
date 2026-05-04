@@ -37,8 +37,9 @@ https://adrien-dutertre.github.io/dungeon-crawler/
 
 ## 📸 Captures d'écran
 
-| Exploration de donjon | Combat contre un monstre |
-| [Niveau 1](./public/screenshot/Screenshot_1.png) | [Jeu en cours](./public/screenshot/Screenshot_2.png) |
+| Exploration de donjon                             | Combat contre un monstre                              |
+| :------------------------------------------------ | :---------------------------------------------------- |
+| ![Niveau 1](./public/screenshot/Screenshot_1.png) | ![Jeu en cours](./public/screenshot/Screenshot_2.png) |
 
 ## 🤝 Contribuer
 
