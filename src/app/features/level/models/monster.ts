@@ -11,7 +11,7 @@ export class Monster implements Tile {
   dead: boolean = false;
 
   constructor(monsterHp?: number) {
-    this.source = signal('/sprites/monster.png');
+    this.source = signal('./sprites/monster.png');
     this._monsterHp = monsterHp; //Monster HP
   }
 
@@ -37,7 +37,7 @@ export class Monster implements Tile {
 
   kill(): void {
     this.dead = true;
-    this.source.set('/sprites/monster-dead.png');
+    this.source.set('./sprites/monster-dead.png');
     this.interactible = false;
   }
 }

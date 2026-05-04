@@ -10,7 +10,7 @@ export class Coin implements Tile {
   interactible: boolean = true;
 
   constructor() {
-    this.source = signal('/sprites/coins.png');
+    this.source = signal('./sprites/coins.png');
   }
 
   description(): string {
@@ -23,7 +23,7 @@ export class Coin implements Tile {
 
   loot(): void {
     this.looted = true;
-    this.source.set('/sprites/floor.png');
+    this.source.set('./sprites/floor.png');
     this.interactible = false;
   }
 

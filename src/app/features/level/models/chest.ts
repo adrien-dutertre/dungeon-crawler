@@ -10,7 +10,7 @@ export class Chest implements Tile {
   looted: boolean = false;
 
   constructor() {
-    this.source = signal('/sprites/chest-closed.png');
+    this.source = signal('./sprites/chest-closed.png');
   }
 
   description(): string {
@@ -23,7 +23,7 @@ export class Chest implements Tile {
 
   loot(): void {
     this.looted = true;
-    this.source.set('/sprites/chest-opened.png');
+    this.source.set('./sprites/chest-opened.png');
     this.interactible = false;
   }
 

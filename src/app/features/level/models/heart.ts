@@ -10,7 +10,7 @@ export class Heart implements Tile {
   interactible: boolean = true;
 
   constructor(value?: number) {
-    this.source = signal('/sprites/life.png');
+    this.source = signal('./sprites/life.png');
     this._heartValue = value;
   }
 
@@ -24,7 +24,7 @@ export class Heart implements Tile {
 
   loot(): void {
     this.looted = true;
-    this.source.set('/sprites/floor.png');
+    this.source.set('./sprites/floor.png');
     this.interactible = false;
   }
 

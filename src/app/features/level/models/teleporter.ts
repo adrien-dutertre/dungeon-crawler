@@ -8,7 +8,7 @@ export class Teleporter implements Tile {
   walkable: boolean = true;
 
   constructor() {
-    this.source = signal('/sprites/teleporter.png');
+    this.source = signal('./sprites/teleporter.png');
   }
   description?(): string {
     return 'Téléporteur';

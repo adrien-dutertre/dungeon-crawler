@@ -7,6 +7,6 @@ export class Floor implements Tile {
   interactible: boolean = false;
 
   constructor() {
-    this.source = signal('/sprites/floor.png');
+    this.source = signal('./sprites/floor.png');
   }
 }

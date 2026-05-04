@@ -7,6 +7,6 @@ export class Start implements Tile {
   interactible: boolean = false;
 
   constructor() {
-    this.source = signal('/sprites/start.png');
+    this.source = signal('./sprites/start.png');
   }
 }

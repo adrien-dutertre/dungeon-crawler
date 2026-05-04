@@ -8,7 +8,7 @@ export class Door implements Tile {
   walkable: boolean = false;
 
   constructor() {
-    this.source = signal('/sprites/door.png');
+    this.source = signal('./sprites/door.png');
   }
 
   description(): string {

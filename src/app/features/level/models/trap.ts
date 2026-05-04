@@ -8,7 +8,7 @@ export class Trap implements Tile {
   interactible: boolean = true;
 
   constructor() {
-    this.source = signal('/sprites/trap.png');
+    this.source = signal('./sprites/trap.png');
   }
 
   description(): string {

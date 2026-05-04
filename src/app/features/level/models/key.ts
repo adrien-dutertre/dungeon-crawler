@@ -9,7 +9,7 @@ export class Key implements Tile {
   looted?: boolean = false;
 
   constructor() {
-    this.source = signal('/sprites/key.png');
+    this.source = signal('./sprites/key.png');
   }
 
   description(): string {
@@ -29,7 +29,7 @@ export class Key implements Tile {
 
   loot(): void {
     this.looted == true;
-    this.source.set('/sprites/floor.png');
+    this.source.set('./sprites/floor.png');
     this.interactible = false;
   }
 }

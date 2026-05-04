@@ -8,7 +8,7 @@ export class Exit implements Tile {
   interactible: boolean = true;
 
   constructor() {
-    this.source = signal('/sprites/exit.png');
+    this.source = signal('./sprites/exit.png');
   }
 
   description(): string {
