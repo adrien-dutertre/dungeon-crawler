@@ -1,5 +1,14 @@
-<p-dialog [header]="dice.modalTitle()" [(visible)]="diceDialogVisible" [modal]="true" closable="false"
-    [style]="{width: 'clamp(320px, 90%, 320px)'}">
-    <p>Résultat du dé : {{ dice.result() }}</p>
-    <p-button label="Ok" (onClick)="dice.closeModal()" />
+<p-dialog [header]="dice.modalTitle" [(visible)]="diceDialogVisible" [modal]="true" closable="false"
+    [style]="{width: 'clamp(320px, 90%, 320px)'}" draggable="false">
+    <ng-template #content class="flex items-center grow">
+
+        @if (dice.modalMessage) {
+        <p>{{ dice.modalMessage }}</p>
+        }
+        <app-dice-object></app-dice-object>
+        <p>Résultat du dé : {{ dice.result() }}</p>
+    </ng-template>
+    <ng-template #footer>
+        <p-button [label]="dice.modalButtonLabel" (onClick)="dice.closeModal()" />
+    </ng-template>
 </p-dialog>

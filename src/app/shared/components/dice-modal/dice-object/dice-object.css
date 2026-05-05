@@ -1,0 +1,43 @@
+.rotation {
+  transform-origin: 32px 32px 0px;
+  transition: 0.5s cubic-bezier(0.42, 1.57, 0.62, 0.86);
+  transform: rotateX(30deg) rotateZ(-30deg) rotateY(180deg);
+  animation: diceRotation 0.7s ease-in, diceThrow 1s linear;
+}
+
+
+@keyframes diceRotation {
+  30% {
+    transform: rotate3d(1, 1, 1, 0deg);
+  }
+  100% {
+    transform: rotate3d(1, 1, 1, 720deg);
+  }
+}
+
+@keyframes diceThrow {
+    20% {
+    margin-top: -100px;
+  }
+  40% {
+    margin-top: 0px;
+  }
+  60% {
+    margin-top: -30px;
+  }
+  80% {
+    margin-top: 0px;
+  }
+  85% {
+    margin-top: -10px;
+  }
+  90% {
+    margin-top: 0px;
+  }
+  95% {
+    margin-top: -3px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}
