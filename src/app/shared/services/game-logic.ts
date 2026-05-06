@@ -66,7 +66,10 @@ export class GameLogic {
 
   // Initier un tour
   startTurn(): void {
-    this.dice.throw(0);
+    this.dice.throw({
+      title: 'Dé de déplacement',
+      buttonLabel: 'Ok',
+    });
     this.cardinal_movement.set(this.dice.result() % 2 == 0);
     this.hero.moves.set(this.isMovable() ? this.dice.result() : 0);
   }
@@ -123,7 +126,11 @@ export class GameLogic {
     if (interaction.coinLoot) {
       let coins = interaction.coins;
       if (coins == undefined) {
-        this.dice.throw(1);
+        this.dice.throw({
+          title: 'Dé de pièces trouvées',
+          message: 'Vous gagnez des pièces !',
+          buttonLabel: 'Ok',
+        });
         coins = this.dice.result();
       }
       this.hero.getCoins(coins);
@@ -132,7 +139,11 @@ export class GameLogic {
     if (interaction.coinLost) {
       let coins = interaction.coins;
       if (coins == undefined) {
-        this.dice.throw(1);
+        this.dice.throw({
+          title: 'Dé de pièces perdues',
+          message: 'Vous perdez des pièces...',
+          buttonLabel: 'Ok',
+        });
         coins = this.dice.result();
       }
       this.hero.loseCoins(coins);
@@ -141,7 +152,11 @@ export class GameLogic {
     if (interaction.heroHeal) {
       let health = interaction.health;
       if (health == undefined) {
-        this.dice.throw(2);
+        this.dice.throw({
+          title: 'Dé de gain de vie',
+          message: 'Vous gagnez de la vie !',
+          buttonLabel: 'Ok',
+        });
         health = this.dice.result();
       }
       this.hero.heal(health);
@@ -150,7 +165,11 @@ export class GameLogic {
     if (interaction.heroHit) {
       let damages = interaction.health;
       if (damages == undefined) {
-        this.dice.throw(3);
+        this.dice.throw({
+          title: 'Dé de perte de vie',
+          message: 'Vous prenez des dégâts...',
+          buttonLabel: 'Ok',
+        });
         damages = this.dice.result();
       }
       this.hero.hit(damages);

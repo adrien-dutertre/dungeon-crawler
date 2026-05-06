@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { DiceModalConfig } from './dice-modal-config';
 
 @Injectable({
   providedIn: 'root',
@@ -7,15 +8,9 @@ export class Dice {
   result = signal<number>(0);
 
   modal = signal<boolean>(false);
-  modalTitle = signal<string>('');
-
-  private readonly titles = new Map([
-    [0, 'Dé de déplacement'],
-    [1, 'Dé de quantité de trésor'],
-    [2, 'Dé de quantité de vie récupérée'],
-    [3, 'Dé de force ennemi'],
-    [4, 'Dé de piège'],
-  ]);
+  modalTitle: string = 'Titre';
+  modalMessage: string | undefined = 'Message';
+  modalButtonLabel: string = 'Label';
 
   // Fonction aléatoire de lancement de dé 6
   private random(): void {
@@ -24,8 +19,10 @@ export class Dice {
   }
 
   // Lancer de dé
-  throw(titleNumber: number): void {
-    this.modalTitle.set(this.titles.get(titleNumber) ?? 'Titre');
+  throw(config: DiceModalConfig): void {
+    this.modalTitle = config.title;
+    this.modalMessage = config.message;
+    this.modalButtonLabel = config.buttonLabel;
     this.modal.set(true);
     this.random();
   }

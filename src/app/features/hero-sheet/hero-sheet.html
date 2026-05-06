@@ -23,22 +23,31 @@
 </div>
 @if (hero.moves() > 0) {
 <div class="grid grid-cols-3 grid-rows-3 aspect-square justify-center items-center">
-    <p-button icon="pi pi-arrow-up-left" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[0]"
-        [raised]="logic.allowedDirection()[0]" (onClick)="logic.chooseDirection(0)" />
-    <p-button icon="pi pi-arrow-up" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[1]"
-        [raised]="logic.allowedDirection()[1]" (onClick)="logic.chooseDirection(1)" />
-    <p-button icon="pi pi-arrow-up-right" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[2]"
-        [raised]="logic.allowedDirection()[2]" (onClick)="logic.chooseDirection(2)" />
-    <p-button icon="pi pi-arrow-left" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[3]"
-        [raised]="logic.allowedDirection()[3]" (onClick)="logic.chooseDirection(3)" />
-    <div>{{ hero.moves() }}</div>
-    <p-button icon="pi pi-arrow-right" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[5]"
-        [raised]="logic.allowedDirection()[5]" (onClick)="logic.chooseDirection(5)" />
-    <p-button icon="pi pi-arrow-down-left" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[6]"
-        [raised]="logic.allowedDirection()[6]" (onClick)="logic.chooseDirection(6)" />
-    <p-button icon="pi pi-arrow-down" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[7]"
-        [raised]="logic.allowedDirection()[7]" (onClick)="logic.chooseDirection(7)" />
-    <p-button icon="pi pi-arrow-down-right" size="large" variant="outlined" [disabled]="!logic.allowedDirection()[8]"
+    <p-button icon="pi pi-arrow-up-left" size="large" [variant]="logic.allowedDirection()[0] ? undefined : 'outlined'"
+        [disabled]="!logic.allowedDirection()[0]" [raised]="logic.allowedDirection()[0]"
+        (onClick)="logic.chooseDirection(0)" />
+    <p-button icon="pi pi-arrow-up" size="large" [variant]="logic.allowedDirection()[1] ? undefined : 'outlined'"
+        [disabled]="!logic.allowedDirection()[1]" [raised]="logic.allowedDirection()[1]"
+        (onClick)="logic.chooseDirection(1)" />
+    <p-button icon="pi pi-arrow-up-right" size="large" [variant]="logic.allowedDirection()[2] ? undefined : 'outlined'"
+        [disabled]="!logic.allowedDirection()[2]" [raised]="logic.allowedDirection()[2]"
+        (onClick)="logic.chooseDirection(2)" />
+    <p-button icon="pi pi-arrow-left" size="large" [variant]="logic.allowedDirection()[3] ? undefined : 'outlined'"
+        [disabled]="!logic.allowedDirection()[3]" [raised]="logic.allowedDirection()[3]"
+        (onClick)="logic.chooseDirection(3)" />
+    <div title="Déplacements restants" class="flex items-center justify-center text-2xl text-neutral-500">{{
+        hero.moves() }}</div>
+    <p-button icon="pi pi-arrow-right" size="large" [variant]="logic.allowedDirection()[5] ? undefined : 'outlined'"
+        [disabled]="!logic.allowedDirection()[5]" [raised]="logic.allowedDirection()[5]"
+        (onClick)="logic.chooseDirection(5)" />
+    <p-button icon="pi pi-arrow-down-left" size="large" [variant]="logic.allowedDirection()[6] ? undefined : 'outlined'"
+        [disabled]="!logic.allowedDirection()[6]" [raised]="logic.allowedDirection()[6]"
+        (onClick)="logic.chooseDirection(6)" />
+    <p-button icon="pi pi-arrow-down" size="large" [variant]="logic.allowedDirection()[7] ? undefined : 'outlined'"
+        [disabled]="!logic.allowedDirection()[7]" [raised]="logic.allowedDirection()[7]"
+        (onClick)="logic.chooseDirection(7)" />
+    <p-button icon="pi pi-arrow-down-right" size="large"
+        [variant]="logic.allowedDirection()[8] ? undefined : 'outlined'" [disabled]="!logic.allowedDirection()[8]"
         [raised]="logic.allowedDirection()[8]" (onClick)="logic.chooseDirection(8)" />
 </div>
 } @else {
