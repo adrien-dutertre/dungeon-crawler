@@ -142,7 +142,7 @@ export class GameLogic {
         this.dice.throw({
           title: 'Dé de pièces perdues',
           message: 'Vous perdez des pièces...',
-          buttonLabel: '',
+          buttonLabel: 'Ok',
         });
         coins = this.dice.result();
       }

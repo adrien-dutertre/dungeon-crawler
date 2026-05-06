@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { Dice } from '../services/dice';
 
 @Component({
   selector: 'app-dice-object',
@@ -7,12 +8,16 @@ import { Component } from '@angular/core';
   styleUrl: './dice-object.css',
 })
 export class DiceObject {
-  /*
-    1: rotateX(30) rotateZ(-30)
-    2: rotateX(30) rotateZ(-30) rotateX(90)
-    3: rotateX(30) rotateZ(-30) rotateY(90)
-    4: rotateX(30) rotateZ(-30) rotateY(90)
-    5: rotateX(30) rotateZ(-30) rotateX(-90)
-    6: rotateX(30) rotateZ(-30) rotateX(180)
-  */
+  throw = inject(Dice);
+
+  private readonly faces = new Map([
+    [1, 'face1'],
+    [2, 'face2'],
+    [3, 'face3'],
+    [4, 'face4'],
+    [5, 'face5'],
+    [6, 'face6'],
+  ]);
+
+  visibleFace = computed(() => this.faces.get(this.throw.result()));
 }

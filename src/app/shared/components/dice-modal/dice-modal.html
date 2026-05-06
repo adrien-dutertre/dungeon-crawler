@@ -6,7 +6,6 @@
         <p>{{ dice.modalMessage }}</p>
         }
         <app-dice-object></app-dice-object>
-        <p>Résultat du dé : {{ dice.result() }}</p>
     </ng-template>
     <ng-template #footer>
         <p-button [label]="dice.modalButtonLabel" (onClick)="dice.closeModal()" />
