@@ -21,6 +21,10 @@ Ce projet est actuellement en phase de développement actif.
 - 🐛 **Bugs connus :** Des instabilités peuvent survenir.
 - 🚧 **Fonctionnalités limitées :** Toutes les mécaniques prévues ne sont pas encore implémentées.
 
+### Dernières MAJ
+
+06/05/2026 : Une vue sympa pour le lancer de dé ! Amélioration des boutons de déplacement.
+
 _Ce README sera mis à jour au fur et à mesure de l'avancement du projet._
 
 ## 🎮 Comment jouer
