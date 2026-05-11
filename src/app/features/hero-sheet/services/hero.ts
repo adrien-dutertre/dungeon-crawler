@@ -1,4 +1,4 @@
-import { Inventary } from './../models/inventary';
+import { Item } from '../../inventory/models/item';
 import { Injectable, signal, computed, WritableSignal, linkedSignal, inject } from '@angular/core';
 
 @Injectable({
@@ -28,7 +28,7 @@ export class Hero {
 
   moves = signal<number>(0);
 
-  inventary = signal<Inventary[]>([]);
+  inventary = signal<Item[]>([]);
 
   init(level: number, hp: number, maxHp: number, coins: number, position: number): void {
     this.current_level = level;
