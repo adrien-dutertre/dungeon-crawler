@@ -10,15 +10,12 @@
                 class="ml-2">{{ hero.current_coins() }}</span>
         </div>
     </div>
-    <p-button label="Inventaire" icon="pi pi-shopping-bag" class="ml-auto" severity="secondary"
-        (click)="inventaryVisibility = true" disabled />
+    @let inventory = hero.inventory();
+    <p-button label="Inventaire" [badge]="inventory.length.toString()" icon="pi pi-shopping-bag" class="ml-auto"
+        severity="secondary" (click)="inventaryVisibility = true" [disabled]="inventory.length == 0" />
     <p-drawer header="Inventaire" position="bottom" dismissible="false" [(visible)]="inventaryVisibility"
         [style]="{ height: 'auto' }">
-        <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-        </ul>
+        <app-inventory [items]="hero.inventory()"></app-inventory>
     </p-drawer>
 </div>
 @if (hero.moves() > 0) {

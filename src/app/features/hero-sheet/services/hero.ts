@@ -1,10 +1,11 @@
-import { Item } from '../../inventory/models/item';
-import { Injectable, signal, computed, WritableSignal, linkedSignal, inject } from '@angular/core';
+import { InventoryService } from '../../inventory/models/inventory-service';
+import { Injectable, signal, computed, inject, linkedSignal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Hero {
+  inventoryService = inject(InventoryService);
   current_level: number = 1;
 
   current_hp = signal<number>(10);
@@ -28,7 +29,7 @@ export class Hero {
 
   moves = signal<number>(0);
 
-  inventary = signal<Item[]>([]);
+  inventory = linkedSignal(() => this.inventoryService.current());
 
   init(level: number, hp: number, maxHp: number, coins: number, position: number): void {
     this.current_level = level;

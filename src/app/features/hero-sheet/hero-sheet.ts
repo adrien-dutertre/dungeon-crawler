@@ -7,10 +7,19 @@ import { Hero } from './services/hero';
 import { DiceModal } from '../../shared/components/dice-modal/dice-modal';
 import { GameLogic } from '../../shared/services/game-logic';
 import { ConfirmDialog } from '../../shared/components/confirm-dialog/confirm-dialog';
+import { Inventory } from '../inventory/inventory';
 
 @Component({
   selector: 'app-hero-sheet',
-  imports: [ButtonModule, DividerModule, ScrollPanelModule, DrawerModule, DiceModal, ConfirmDialog],
+  imports: [
+    ButtonModule,
+    DividerModule,
+    ScrollPanelModule,
+    DrawerModule,
+    DiceModal,
+    ConfirmDialog,
+    Inventory,
+  ],
   templateUrl: './hero-sheet.html',
   styleUrl: './hero-sheet.css',
 })

@@ -1,9 +1,12 @@
-@for (item of items(); track $index) {
-<div class="p-4 flex flex-row gap-4 grow">
-    <img [ngSrc]="item.img_url" alt="" fill>
-    <div class="flex flex-col">
-        <h3>{{item.title}}</h3>
-        <p>{{item.description}}</p>
+<div class="flex flex-col gap-4">
+    @for (item of items(); track $index) {
+    <div class="flex flex-row gap-2">
+        <img [ngSrc]="item.img_url" alt="Image" width="32" height="32" class="w-8 h-8">
+        <div class="flex flex-col">
+            <h3 class="text-l font-bold">{{item.title}}</h3>
+            <p class="text-xs">{{item.description}}</p>
+        </div>
+        <p-button label="Utiliser" size="small" class="ml-auto" />
     </div>
+    }
 </div>
-}
