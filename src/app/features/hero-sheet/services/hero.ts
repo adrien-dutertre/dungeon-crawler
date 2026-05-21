@@ -11,7 +11,7 @@ export class Hero {
   current_hp = signal<number>(10);
   MAX_HP = signal<number>(10);
 
-  current_coins = signal<number>(0);
+  current_coins = signal<number>(30);
 
   position = signal<number>(0);
   private readonly top = computed(() => {
