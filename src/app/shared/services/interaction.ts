@@ -8,4 +8,5 @@ export interface Interaction {
   coinLost?: boolean;
   coins?: number | undefined;
   key?: boolean;
+  endurance?: boolean;
 }

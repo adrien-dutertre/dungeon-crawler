@@ -5,13 +5,17 @@ import { Injectable, signal, computed, inject, linkedSignal } from '@angular/cor
   providedIn: 'root',
 })
 export class Hero {
-  inventoryService = inject(InventoryService);
+  inventory = inject(InventoryService);
   current_level: number = 1;
 
   current_hp = signal<number>(10);
   MAX_HP = signal<number>(10);
 
   current_coins = signal<number>(30);
+
+  modifyer_coins: number = 1;
+  modifyer_attack: number = 0;
+  modifyer_defense: number = 0;
 
   position = signal<number>(0);
   private readonly top = computed(() => {
@@ -28,8 +32,6 @@ export class Hero {
   });
 
   moves = signal<number>(0);
-
-  inventory = linkedSignal(() => this.inventoryService.current());
 
   init(level: number, hp: number, maxHp: number, coins: number, position: number): void {
     this.current_level = level;
@@ -78,5 +80,10 @@ export class Hero {
     this.MAX_HP.set(10);
     this.current_hp.set(this.MAX_HP());
     this.current_coins.set(0);
+  }
+
+  // Augmenter la vie MAX
+  endurance(): void {
+    this.MAX_HP.update((current_MAX_HP) => current_MAX_HP++);
   }
 }

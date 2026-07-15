@@ -8,4 +8,5 @@ export interface Item {
   chance_of_appearing: number;
   interaction: Interaction;
   bought: boolean;
+  directEffect: boolean;
 }
