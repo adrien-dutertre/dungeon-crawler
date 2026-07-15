@@ -7,7 +7,7 @@
         Bienvenue à la boutique ! Profitez-en pour faire quelques emplettes.
     </p>
     <div class="flex flex-col gap-1">
-        @for (item of shop.list; track $index) {
+        @for (item of shop.shoppingList(); track $index) {
         @if (!item.bought) {
         <div class="flex flex-row gap-2 border border-neutral-100 rounded-s p-2">
             <img [ngSrc]="item.img_url" alt="Image" width="32" height="32" class="w-8 h-8">
