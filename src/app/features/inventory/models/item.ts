@@ -7,4 +7,6 @@ export interface Item {
   price: number;
   chance_of_appearing: number;
   interaction: Interaction;
+  bought: boolean;
+  directEffect: boolean;
 }

@@ -1,0 +1,36 @@
+<div class="flex flex-col sm:max-w-96 w-full p-2">
+    <div class="w-full flex items-center justify-between">
+        <h3 class="text-2xl font-bold">Boutique</h3>
+        <p-button label="Sortir de la boutique" variant="outlined" (onClick)="logic.resolveEvent({exit: true})" />
+    </div>
+    <p>
+        Bienvenue à la boutique ! Profitez-en pour faire quelques emplettes.
+    </p>
+    <div class="flex flex-col gap-1">
+        @for (item of shop.shoppingList(); track $index) {
+        @if (!item.bought) {
+        <div class="flex flex-row gap-2 border border-neutral-100 rounded-s p-2">
+            <img [ngSrc]="item.img_url" alt="Image" width="32" height="32" class="w-8 h-8">
+            <div class="flex flex-col">
+                <h4 class="text-l font-bold">{{item.title}}</h4>
+                <p class="text-xs">{{item.description}}</p>
+            </div>
+            <div class="ml-auto flex gap-2 items-center">
+                <div class="flex gap-0.5">
+                    <i class="pi pi-database" style="color: var(--color-yellow-500)"></i>
+                    <span>{{ item.price }}</span>
+                </div>
+                <p-button label="Acheter" size="small" (onClick)="shop.buy(item)"
+                    [disabled]="hero.current_coins() < item.price" />
+            </div>
+        </div>
+        } @else {
+        <div class="flex items-center justify-center bg-neutral-100 border-neutral-100 rounded-s p-2">
+            <span>Acheté</span>
+        </div>
+        }
+        }
+
+    </div>
+    <app-hero-sheet></app-hero-sheet>
+</div>

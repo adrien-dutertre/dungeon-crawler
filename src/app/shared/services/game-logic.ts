@@ -5,7 +5,6 @@ import { Dice } from '../components/dice-modal/services/dice';
 import { Tile } from '../../features/level/models/tile';
 import { LevelService } from '../../features/level/services/level.service';
 import { ConfirmationService } from 'primeng/api';
-import { Events } from './events';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -58,6 +57,8 @@ export class GameLogic {
           true && this.canWalkThere(8),
         ];
   });
+
+  modifyer_dice: number = 1;
 
   // Initier le jeu
   init(): void {
@@ -174,9 +175,17 @@ export class GameLogic {
       }
       this.hero.hit(damages);
     }
+
+    // Augmenter l'endurance
+    if (interaction.endurance) {
+      this.hero.endurance();
+    }
+
     if (interaction.heroStop) {
       this.hero.moves.set(0);
     }
+
+    // Fin du niveau
     if (interaction.exit) {
       this.confirmationService.confirm({
         message: 'Voulez-vous quitter le niveau ?',
