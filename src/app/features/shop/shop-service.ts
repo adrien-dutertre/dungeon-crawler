@@ -14,19 +14,22 @@ export class ShopService {
 
   shoppingList = signal<Item[]>(this.shopping());
 
-  // Affichage de la boutique
+  // Affichage des items de la boutique
   shopping(): Item[] {
     const SHOPPING_ITEMS: number = 3;
-    const list: Item[] = [];
+    const listSelected: Item[] = [];
+    const listRandom: number[] = [];
     const listOrdered: Item[] = this.items.sort(
       (a, b) => b.chance_of_appearing - a.chance_of_appearing,
     );
-    while (list.length < SHOPPING_ITEMS) {
+    while (listSelected.length < SHOPPING_ITEMS) {
       let random: number = Math.floor(Math.random() * this.items.length);
-
-      list.push(listOrdered[random]);
+      if (listRandom.indexOf(random) == -1) {
+        listRandom.push(random);
+        listSelected.push(listOrdered[random]);
+      }
     }
-    return list;
+    return listSelected;
   }
 
   // Shopping interactions
