@@ -5,9 +5,14 @@ import { LevelService } from '../level/services/level.service';
 
 export const levelSettingsResolver: ResolveFn<boolean> = (route, state) => {
   const id: number = Number(route.paramMap.get('id'));
-  const level = inject(LevelService);
-  level.floor.set(id);
+  const levelService = inject(LevelService);
+  levelService.floor.set(id);
+
   const logic = inject(GameLogic);
   logic.init();
-  return true;
+
+  const shopFloor: boolean = levelService.levels[levelService.floor() - 1].shop;
+  console.log(shopFloor);
+
+  return shopFloor;
 };

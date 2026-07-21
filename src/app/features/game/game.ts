@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Navbar } from '../../shared/components/navbar/navbar';
 import { Level } from '../level/level';
 import { HeroSheet } from '../hero-sheet/hero-sheet';
@@ -10,4 +10,6 @@ import { Shop } from '../shop/shop';
   templateUrl: './game.html',
   styleUrl: './game.css',
 })
-export class Game {}
+export class Game {
+  shopFloor = input.required<boolean>();
+}

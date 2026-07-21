@@ -1,4 +1,7 @@
 <app-navbar></app-navbar>
-<!-- <app-shop></app-shop> -->
+@if (shopFloor()) {
+<app-shop></app-shop>
+} @else {
 <app-level></app-level>
 <app-hero-sheet></app-hero-sheet>
+}

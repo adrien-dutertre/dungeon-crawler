@@ -12,6 +12,7 @@ export class LevelService {
 
   levels: ILevel[] = [
     {
+      floor: 1,
       shop: false,
       level: [
         'v',
@@ -242,6 +243,7 @@ export class LevelService {
       ],
     },
     {
+      floor: 2,
       shop: false,
       level: [
         'v',
@@ -472,6 +474,7 @@ export class LevelService {
       ],
     },
     {
+      floor: 3,
       shop: false,
       level: [
         'w1',
@@ -702,6 +705,7 @@ export class LevelService {
       ],
     },
     {
+      floor: 4,
       shop: false,
       level: [
         'w1',
@@ -932,6 +936,7 @@ export class LevelService {
       ],
     },
     {
+      floor: 5,
       shop: false,
       level: [
         'w1',
@@ -1162,6 +1167,7 @@ export class LevelService {
       ],
     },
     {
+      floor: 6,
       shop: true,
       level: [],
     },

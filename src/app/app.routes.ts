@@ -12,7 +12,7 @@ export const routes: Routes = [
     path: 'level/:id',
     component: Game,
     resolve: {
-      settings: levelSettingsResolver,
+      shopFloor: levelSettingsResolver,
     },
   },
 ];
