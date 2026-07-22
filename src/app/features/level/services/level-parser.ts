@@ -12,6 +12,7 @@ import { Floor } from '../models/floor';
 import { Key } from '../models/key';
 import { Door } from '../models/door';
 import { Teleporter } from '../models/teleporter';
+import { Void } from '../models/void';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +45,7 @@ export class LevelParser {
     ['t', () => new Trap()],
     ['k', () => new Key()],
     ['d', () => new Door()],
+    ['v', () => new Void()],
     ['x', () => new Teleporter()],
   ]);
 
