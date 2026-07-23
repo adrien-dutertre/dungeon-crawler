@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { LevelParser } from './level-parser';
 import { Start } from '../models/start';
 import { ILevel } from './ilevel';
@@ -1172,6 +1172,8 @@ export class LevelService {
       level: [],
     },
   ];
+
+  transition: WritableSignal<boolean> = signal(false);
 
   readonly current = computed(() => this.parserService.parse(this.levels[this.floor() - 1].level));
 

@@ -12,7 +12,6 @@ export const levelSettingsResolver: ResolveFn<boolean> = (route, state) => {
   logic.init();
 
   const shopFloor: boolean = levelService.levels[levelService.floor() - 1].shop;
-  console.log(shopFloor);
 
   return shopFloor;
 };
