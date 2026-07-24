@@ -201,6 +201,7 @@ export class GameLogic {
   }
 
   endOfLevel(): void {
+    this.level.transition.set(true);
     if (this.checkHero()) {
       this.nextLevel();
     } else {
@@ -221,7 +222,6 @@ export class GameLogic {
     }
     this.hero.moves.set(0);
     this.hero.current_level++;
-    this.level.transition.set(true);
     setTimeout(() => this.level.transition.set(false), 2000);
     this.router.navigate(['/level', this.hero.current_level]);
   }

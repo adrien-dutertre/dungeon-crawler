@@ -1,23 +1,30 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .hero {
-    background-image: url("../../../../public/sprites/hero-1.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    transition: all 1s;
+  background-image: url('../../../../public/sprites/hero-1.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transition: all 1s;
 }
 
-.transition {
-    animation: tile 1s ease-out 250ms 1 backwards;
+.tileOn {
+  animation: newTile 1s ease-out 250ms 1 backwards;
 }
 
-@keyframes tile {
-    100% {
-        transform: rotateY(180deg);
-    }
+.tileOff {
+  animation: newTile 1s ease-out 250ms 1 backwards reverse;
+}
+
+@keyframes newTile {
+  0% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
 }
