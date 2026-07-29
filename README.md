@@ -23,6 +23,8 @@ Ce projet est actuellement en phase de développement actif.
 
 ### Dernières MAJ
 
+29/07/2026 : Ajout de 2 premiers niveaux, chargement sty-lay du niveau, la boutique est là ! (mais pas encore d'items utilisables dans l'inventaire...)
+
 06/05/2026 : Une vue sympa pour le lancer de dé ! Amélioration des boutons de déplacement.
 
 _Ce README sera mis à jour au fur et à mesure de l'avancement du projet._
@@ -41,9 +43,9 @@ https://adrien-dutertre.github.io/dungeon-crawler/
 
 ## 📸 Captures d'écran
 
-| Exploration de donjon                             | Combat contre un monstre                              |
-| :------------------------------------------------ | :---------------------------------------------------- |
-| ![Niveau 1](./public/screenshot/Screenshot_1.png) | ![Jeu en cours](./public/screenshot/Screenshot_2.png) |
+| Exploration de donjon                           | Combat contre un monstre                              |
+| :---------------------------------------------- | :---------------------------------------------------- |
+| ![Niveau](./public/screenshot/Screenshot_1.png) | ![Jeu en cours](./public/screenshot/Screenshot_2.png) |
 
 ## 🤝 Contribuer
 
