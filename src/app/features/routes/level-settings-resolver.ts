@@ -7,8 +7,7 @@ export const levelSettingsResolver: ResolveFn<boolean> = (route, state) => {
   const id: number = Number(route.paramMap.get('id'));
   const levelService = inject(LevelService);
   levelService.floor.set(id);
-  levelService.transition.set(false);
-
+  setTimeout(() => levelService.transition.set(false), 1000);
   const logic = inject(GameLogic);
   logic.init();
 

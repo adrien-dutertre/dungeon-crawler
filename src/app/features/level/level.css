@@ -13,18 +13,32 @@
 }
 
 .tileOn {
-  animation: newTile 1s ease-out 250ms 1 backwards;
+  animation: endTransition 1s ease-out 1 backwards;
+  animation-delay: calc(var(--value) * 10ms);
 }
 
 .tileOff {
-  animation: newTile 1s ease-out 250ms 1 backwards reverse;
+  animation: startTransition 1s ease-out 1;
+  animation-delay: calc(var(--value) * 10ms);
+  /* transform: rotateY(-180deg); */
 }
 
-@keyframes newTile {
+@keyframes startTransition {
+  from {
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes endTransition {
   0% {
+    opacity: 0;
     transform: rotateY(180deg);
   }
   100% {
+    opacity: 1;
     transform: rotateY(0deg);
   }
 }

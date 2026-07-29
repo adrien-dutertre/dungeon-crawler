@@ -8,7 +8,7 @@ import { ConfirmationService } from 'primeng/api';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
+    provideRouter(routes, withComponentInputBinding()),
     providePrimeNG({
       theme: {
         preset: Aura,

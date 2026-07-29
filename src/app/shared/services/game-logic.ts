@@ -222,7 +222,6 @@ export class GameLogic {
     }
     this.hero.moves.set(0);
     this.hero.current_level++;
-    setTimeout(() => this.level.transition.set(false), 2000);
     this.router.navigate(['/level', this.hero.current_level]);
   }
 
