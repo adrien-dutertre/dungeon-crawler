@@ -192,6 +192,10 @@ export class GameLogic {
         message: 'Voulez-vous quitter le niveau ?',
         header: 'Fin du niveau',
         rejectLabel: 'Non, rester',
+        rejectButtonProps: {
+          severity: 'secondary',
+          outlined: true,
+        },
         acceptLabel: 'Oui, quitter',
         accept: () => {
           this.endOfLevel();
