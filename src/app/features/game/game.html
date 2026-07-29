@@ -1,7 +1,11 @@
 <app-navbar></app-navbar>
+@defer {
 @if (shopFloor()) {
 <app-shop></app-shop>
 } @else {
 <app-level></app-level>
 <app-hero-sheet></app-hero-sheet>
+}
+} @placeholder (minimum 500ms) {
+<p>Chargement du niveau...</p>
 }

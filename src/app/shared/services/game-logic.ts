@@ -5,7 +5,8 @@ import { Dice } from '../components/dice-modal/services/dice';
 import { Tile } from '../../features/level/models/tile';
 import { LevelService } from '../../features/level/services/level.service';
 import { ConfirmationService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, Event } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -191,6 +192,10 @@ export class GameLogic {
         message: 'Voulez-vous quitter le niveau ?',
         header: 'Fin du niveau',
         rejectLabel: 'Non, rester',
+        rejectButtonProps: {
+          severity: 'secondary',
+          outlined: true,
+        },
         acceptLabel: 'Oui, quitter',
         accept: () => {
           this.endOfLevel();
@@ -200,6 +205,7 @@ export class GameLogic {
   }
 
   endOfLevel(): void {
+    this.level.transition.set(true);
     if (this.checkHero()) {
       this.nextLevel();
     } else {

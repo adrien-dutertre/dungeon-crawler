@@ -1,16 +1,14 @@
 import { Routes } from '@angular/router';
-import { Home } from './features/home/home';
-import { Game } from './features/game/game';
 import { levelSettingsResolver } from './features/routes/level-settings-resolver';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Home,
+    loadComponent: () => import('./features/home/home').then((m) => m.Home),
   },
   {
     path: 'level/:id',
-    component: Game,
+    loadComponent: () => import('./features/game/game').then((m) => m.Game),
     resolve: {
       shopFloor: levelSettingsResolver,
     },

@@ -2,7 +2,8 @@
 </h2>
 <div class="grid grid-cols-15 grid-rows-15 aspect-square sm:max-w-96 w-full relative">
     @for (tile of level.current(); track $index) {
-    <div class="w-full h-auto aspect-square border border-neutral-100">
+    <div class="w-full h-auto aspect-square border border-neutral-100 backface-hidden"
+        [ngClass]="level.transition() ? 'tileOff' : 'tileOn'" [style.--value]="$index">
 
         @if (tile.interactible && ((tile.value) && (tile.description))) {
         <p-overlaybadge [value]="tile.value() ?? '?'" severity="secondary" badgeSize="small">

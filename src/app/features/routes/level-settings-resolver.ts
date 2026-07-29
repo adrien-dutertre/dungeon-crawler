@@ -7,12 +7,11 @@ export const levelSettingsResolver: ResolveFn<boolean> = (route, state) => {
   const id: number = Number(route.paramMap.get('id'));
   const levelService = inject(LevelService);
   levelService.floor.set(id);
-
+  setTimeout(() => levelService.transition.set(false), 1000);
   const logic = inject(GameLogic);
   logic.init();
 
   const shopFloor: boolean = levelService.levels[levelService.floor() - 1].shop;
-  console.log(shopFloor);
 
   return shopFloor;
 };

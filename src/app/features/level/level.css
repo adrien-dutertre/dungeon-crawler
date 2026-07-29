@@ -1,13 +1,44 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .hero {
-    background-image: url("../../../../public/sprites/hero-1.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    transition: all 1s;
+  background-image: url('../../../../public/sprites/hero-1.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transition: all 1s;
+}
+
+.tileOn {
+  animation: endTransition 1s ease-out 1 backwards;
+  animation-delay: calc(var(--value) * 10ms);
+}
+
+.tileOff {
+  animation: startTransition 1s ease-out 1;
+  animation-delay: calc(var(--value) * 10ms);
+  /* transform: rotateY(-180deg); */
+}
+
+@keyframes startTransition {
+  from {
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes endTransition {
+  0% {
+    opacity: 0;
+    transform: rotateY(180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
 }
