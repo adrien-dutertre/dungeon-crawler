@@ -5,8 +5,8 @@ import { Dice } from '../components/dice-modal/services/dice';
 import { Tile } from '../../features/level/models/tile';
 import { LevelService } from '../../features/level/services/level.service';
 import { ConfirmationService } from 'primeng/api';
-import { NavigationEnd, NavigationStart, Router, Event } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+import { Events } from './events';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +17,7 @@ export class GameLogic {
   private level = inject(LevelService);
   private confirmationService = inject(ConfirmationService);
   private router = inject(Router);
+  private eventsService = inject(Events);
 
   private cardinal_movement = signal<boolean>(true);
 
@@ -68,6 +69,7 @@ export class GameLogic {
 
   // Initier un tour
   startTurn(): void {
+    this.eventsService.add('Dice');
     this.dice.throw({
       title: 'Dé de déplacement',
       buttonLabel: 'Ok',

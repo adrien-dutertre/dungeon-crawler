@@ -19,13 +19,15 @@ export class Dice {
   }
 
   // Lancer de dé
-  throw(config: DiceModalConfig): void {
+  throw(config: DiceModalConfig, threshold?: number): void {
     this.modalTitle = config.title;
     this.modalMessage = config.message;
     this.modalButtonLabel = config.buttonLabel;
     this.modal.set(true);
     this.random();
   }
+
+  // Lancer de dé avec seuil
 
   // Fermer la modale
   closeModal(): void {

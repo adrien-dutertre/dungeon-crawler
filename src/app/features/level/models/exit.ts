@@ -18,6 +18,7 @@ export class Exit implements Tile {
   interaction(): Interaction {
     console.info('Sortie du niveau.');
     return {
+      heroStop: true,
       exit: true,
     };
   }
